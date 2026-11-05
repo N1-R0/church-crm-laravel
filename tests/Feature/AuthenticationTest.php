@@ -1,0 +1,4 @@
+<?php
+namespace Tests\Feature;
+use App\Models\User;use Illuminate\Foundation\Testing\RefreshDatabase;use Tests\TestCase;
+class AuthenticationTest extends TestCase {use RefreshDatabase;public function test_login_screen_is_rendered():void{$this->get('/login')->assertOk();}public function test_active_user_can_authenticate():void{$u=User::factory()->create(['password'=>'correct-password']);$this->post('/login',['email'=>$u->email,'password'=>'correct-password'])->assertRedirect('/dashboard');$this->assertAuthenticatedAs($u);}public function test_inactive_user_cannot_authenticate():void{$u=User::factory()->create(['password'=>'correct-password','status'=>'inactive']);$this->post('/login',['email'=>$u->email,'password'=>'correct-password'])->assertSessionHasErrors('email');$this->assertGuest();}}

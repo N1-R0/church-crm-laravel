@@ -1,0 +1,29 @@
+{
+  "name": "shepherd-church-crm",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^2.0.17",
+    "@vitejs/plugin-react": "^5.0.4",
+    "axios": "^1.12.2",
+    "laravel-vite-plugin": "^2.0.1",
+    "lucide-react": "^0.545.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "vite": "^7.1.7",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "concurrently": "^9.2.1",
+    "typescript": "^5.9.3",
+    "@types/qrcode": "^1.5.5"
+  }
+}

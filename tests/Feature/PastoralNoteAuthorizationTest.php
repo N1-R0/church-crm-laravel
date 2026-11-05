@@ -1,0 +1,4 @@
+<?php
+namespace Tests\Feature;
+use App\Models\{Member,PastoralNote,User};use Illuminate\Foundation\Testing\RefreshDatabase;use Tests\TestCase;
+class PastoralNoteAuthorizationTest extends TestCase {use RefreshDatabase;public function test_staff_cannot_create_pastoral_note_but_pastor_can():void{$member=Member::create(['first_name'=>'Ada','last_name'=>'Nwosu','status'=>'active','role'=>'member']);$payload=['note_date'=>'2026-11-05','category'=>'care','content'=>'Confidential test note','follow_up_status'=>'pending','confidential'=>true];$staff=User::factory()->create(['role'=>'staff']);$this->actingAs($staff)->post("/members/{$member->id}/pastoral-notes",$payload)->assertForbidden();$pastor=User::factory()->create(['role'=>'pastor']);$this->actingAs($pastor)->post("/members/{$member->id}/pastoral-notes",$payload)->assertRedirect();$this->assertDatabaseHas('pastoral_notes',['member_id'=>$member->id,'author_id'=>$pastor->id]);}}
